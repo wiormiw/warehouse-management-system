@@ -1,0 +1,38 @@
+{
+  "name": "category-management-cud",
+  "version": "1.0.0",
+  "description": "Category Management For Warehouse Management System (Create, Update, Delete).",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/app.js\""
+  },
+  "keywords": [
+    "express",
+    "microservices"
+  ],
+  "author": "Wijoyo Raharjo Murti Indra Wahyono",
+  "license": "ISC",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.6.0",
+    "@types/amqplib": "^0.10.1",
+    "amqplib": "^0.10.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "elasticsearch": "^16.7.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-openid-connect": "^2.12.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.14.2",
+    "concurrently": "^7.6.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  }
+}

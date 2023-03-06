@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String    @id @default(uuid())
+  name      String    @db.VarChar(25)
+  createdAt DateTime? @default(now()) @map("created_at")
+  updatedAt DateTime? @map("updated_at")
+  Product   Product[]
+  Type      Type[]
+
+  @@unique([id, name])
+}
+
+model Type {
+  id           String    @id @default(uuid())
+  name         String    @db.VarChar(25)
+  category     Category  @relation(fields: [categoryId, categoryName], references: [id, name], onDelete: Cascade, onUpdate: Cascade)
+  categoryId   String    @map("category_id")
+  categoryName String    @map("category_name")
+  createdAt    DateTime? @default(now()) @map("created_at")
+  updatedAt    DateTime? @map("updated_at")
+  Product      Product[]
+
+  @@unique([id, name])
+}
+
+model Product {
+  id                 String    @id @default(uuid())
+  name               String    @unique @db.VarChar(25)
+  category           Category  @relation(fields: [categoryId, categoryName], references: [id, name], onDelete: Restrict, onUpdate: Cascade)
+  categoryId         String    @map("category_id")
+  categoryName       String    @map("category_name")
+  type               Type      @relation(fields: [typeId, typeName], references: [id, name], onDelete: Restrict, onUpdate: Cascade)
+  typeId             String    @map("type_id")
+  typeName           String    @map("type_name")
+  brand              String    @db.VarChar(25)
+  series             String    @db.VarChar(25)
+  technicalParameter String    @unique @map("technical_parameter") @db.VarChar(25)
+  createdAt          DateTime? @default(now()) @map("created_at")
+  updatedAt          DateTime? @map("updated_at")
+}
